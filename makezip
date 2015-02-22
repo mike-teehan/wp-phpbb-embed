@@ -12,7 +12,7 @@ fi
 mkdir -p $ZIPDIR
 
 BASEDIR=$(pwd)
-FNS="wp-phpbb-embed-widget.php"
+FNS="wp-phpbb-embed-widget.php wp-phpbb-widget.js"
 for NAME in $FNS; do
   ln -s "${BASEDIR}/${NAME}" $ZIPDIR
 done
