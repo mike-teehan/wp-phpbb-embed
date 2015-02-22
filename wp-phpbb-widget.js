@@ -18,22 +18,29 @@
 		var $bbdiv = $('#phpbbforum');
 		var url = $bbdiv.data("url"),
 			phpbburl = $bbdiv.data("phpbburl");
-		$.get($url, function(data) {
+		$.get(url, function(json) {
+			if(json['error'] === true) {
+				console.log("wp-phpbb-widget: recents.json.php error (" + json['msg'] + ")");
+				return;
+			}
+			var data = json['data'];
+			// 0: title, 1: username, 2: summary, 3: url, 4: time
 			$.each(data, function(key, row) {
-				var url = phpbburl + "/viewtopic.php?" + data[3];
+				var url = phpbburl + "/viewtopic.php?" + row[3];
 				var $base = $("<div>"),
-					$a = $("<a>").attr('href', url).attr('target', "blank"),
+					$a = $("<a>").attr('href', url)
+						.attr('target', "blank")
+						.append(
+							$("<span>").html(row[0] + "<br />- by " + row[1] + " (" + row[4] + ")")
+						),
 					$hr = $("<hr>");
 				$base.append($a, $hr);
 				$bbdiv.append($base);
 			});
 		})
-			.fail(function() {
-				alert( "error" );
-			})
-			.always(function() {
-				alert( "finished" );
-			});
+		.fail(function() {
+			alert( "error" );
+		});
 	});
 	
 })(jQuery);
