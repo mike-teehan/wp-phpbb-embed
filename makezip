@@ -1,0 +1,20 @@
+#!/bin/sh
+
+ZIPDIR="wp-phpbb-embed"
+
+if [ -x "${ZIPDIR}.zip" ]; then
+  rm "${ZIPDIR}.zip"
+fi
+
+if [ -d $ZIPDIR ]; then
+  rm -rf $ZIPDIR
+fi
+mkdir -p $ZIPDIR
+
+BASEDIR=$(pwd)
+FNS="wp-phpbb-embed-widget.php"
+for NAME in $FNS; do
+  ln -s "${BASEDIR}/${NAME}" $ZIPDIR
+done
+
+zip -r $ZIPDIR $ZIPDIR
