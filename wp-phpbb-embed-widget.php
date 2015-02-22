@@ -63,7 +63,6 @@ class phpBBEmbedWidget extends WP_Widget
 	// phpbburl - base url of phpbb forums eg: //wp.domain.com/phpbb
 	// recenturl - url of the json source for recent posts usually: //wp.domain.com/phpbb/recents.json.php
 	public function form($instance) {
-		error_log("in: " . json_encode($instance));
 		if(isset($instance['wpurl']) )
 			$option1 = $instance['wpurl'];
 		else
