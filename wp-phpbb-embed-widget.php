@@ -23,9 +23,13 @@ class phpBBEmbedWidget extends WP_Widget
 	// outputs the html of the widget
 	function widget($args, $instance) {
 
+		// instance IDs are like widget-23 so chop the number off the end
+		$wid = $this->id;
+		$wid = substr($wid, strrpos($wid, "-") + 1);
+
 		// register the javascripts for loading
-		wp_register_script( 'wp-phpbb-widget' . $this->widget_id, $this->plugin_location . "wp-phpbb-widget.js", array('jquery') );
-		wp_enqueue_script( 'wp-phpbb-widget' . $this->widget_id );
+		wp_register_script('wp-phpbb-widget' . $wid, $this->plugin_location . "wp-phpbb-widget.js", array('jquery') );
+		wp_enqueue_script('wp-phpbb-widget' . $wid);
 
 		// boilerplate BEGIN
 		extract($args, EXTR_SKIP);
@@ -37,16 +41,8 @@ class phpBBEmbedWidget extends WP_Widget
 			echo $before_title . $title . $after_title;
 		// boilerplate END
 
-		$w = new phpBBEmbedWidget();
-		$s = $w->get_settings();
-		$o = null;
-		// FIXME: we find the first instance that has settings and use that. for all pages.
-		foreach($s as $setting) {
-			if(empty($setting) )
-				continue;
-			$o = $setting;
-			break;
-		}
+		$s = $this->get_settings();
+		$o = $s[$wid];
 		$title = $o['title'];
 		$wpurl = $o['wpurl'];
 		$phpbburl = $o['phpbburl'];
@@ -56,7 +52,7 @@ class phpBBEmbedWidget extends WP_Widget
 		$u = parse_url($recentsurl);
 		$dataurl = "{$protocol}://{$u['host']}{$u['path']}";
 
-		echo "<div id='phpbbforum' data-url=\"{$dataurl}\" data-phpbburl=\"{$phpbburl}\"><b>{$title}</b><br /><hr></div>";
+		echo "<div id='phpbbforum' data-url=\"{$dataurl}\" data-phpbburl=\"{$phpbburl}\"><hr></div>";
 
 		// boilerplate
 		echo $after_widget;
