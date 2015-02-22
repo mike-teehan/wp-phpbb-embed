@@ -97,7 +97,7 @@ add_action('widgets_init', create_function('', 'return register_widget("phpBBEmb
 function enqueue_wp_phpbb_widget() {
 	wp_enqueue_script(
 		'wp-phpbb-widget',
-		get_stylesheet_directory_uri() . '/wp-phpbb-widget.js',
+		plugins_url() . '/wp-phpbb-embed/wp-phpbb-widget.js',
 		array('jquery')
 	);
 }
