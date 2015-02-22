@@ -94,7 +94,7 @@ class phpBBEmbedWidget extends WP_Widget
 
 add_action('widgets_init', create_function('', 'return register_widget("phpBBEmbedWidget");') );
 
-function enqueue_wp-phpbb-widget() {
+function enqueue_wp_phpbb_widget() {
 	wp_enqueue_script(
 		'wp-phpbb-widget',
 		get_stylesheet_directory_uri() . '/wp-phpbb-widget.js',
@@ -102,5 +102,5 @@ function enqueue_wp-phpbb-widget() {
 	);
 }
 
-add_action('wp_enqueue_scripts', 'enqueue_wp-phpbb-widget');
+add_action('wp_enqueue_scripts', 'enqueue_wp_phpbb_widget');
 
