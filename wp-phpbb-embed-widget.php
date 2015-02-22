@@ -59,7 +59,7 @@ class phpBBEmbedWidget extends WP_Widget
 		$data = ($obj["data"]) ? $obj["data"] : array();
 		// 0: title, 1: username, 2: summary, 3: url, 4: time
 		foreach($data as $row)
-			$html .= "<a href='{$phpbburl}{$row[3]}' target='_blank'>{$row[0]}</a><br />by {$row[1]}<hr>";
+			$html .= "<a href='{$phpbburl}/viewtopic.php?{$row[3]}' target='_blank'>{$row[0]}</a><br />by {$row[1]}<hr>";
 
 		echo "<div id='phpbbforum'><b>Recent Posts</b>:<hr>{$html}</div>";
 

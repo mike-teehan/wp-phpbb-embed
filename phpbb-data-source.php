@@ -40,7 +40,7 @@ while($row = mysql_fetch_assoc($result) ) {
 	$data[0] = $row['topic_title'];
 	$data[1] = ($row['username'] == "Anonymous") ? $row['anon'] : $row['username'];
 	$data[2] = summary($row['post_text'], 200, true);
-	$data[3] = "/viewtopic.php?f={$row['fid']}&t={$row['tid']}";
+	$data[3] = "f={$row['fid']}&t={$row['tid']}";
 	$data[4] = strftime('%A, %d. %b. %Y', $row['post_time']);
 	$ret[] = $data;
 }
