@@ -40,6 +40,7 @@ class phpBBEmbedWidget extends WP_Widget
 			$o = $setting;
 			break;
 		}
+		$title = $o['title'];
 		$wpurl = $o['wpurl'];
 		$phpbburl = $o['phpbburl'];
 		$recentsurl = $o['recenturl'];
@@ -48,7 +49,7 @@ class phpBBEmbedWidget extends WP_Widget
 		$u = parse_url($recentsurl);
 		$dataurl = "{$protocol}://{$u['host']}{$u['path']}";
 
-		echo "<div id='phpbbforum' data-url=\"{$dataurl}\" data-phpbburl=\"{$phpbburl}\"></div>";
+		echo "<div id='phpbbforum' data-url=\"{$dataurl}\" data-phpbburl=\"{$phpbburl}\"><b>{$title}</b><br /><hr></div>";
 
 		// boilerplate
 		echo $after_widget;
@@ -74,7 +75,16 @@ class phpBBEmbedWidget extends WP_Widget
 			$option3 = $instance['recenturl'];
 		else
 			$option3 = __('new recenturl', 'wpb_widget_domain');
+
+		if(isset($instance['title']) )
+			$option4 = $instance['title'];
+		else
+			$option4 = __('new title', 'wpb_widget_domain');
 ?>
+<p>
+<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
+<input class="widefat" id="<?php echo $this->get_field_id('title' ); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($option4); ?>" />
+</p>
 <p>
 <label for="<?php echo $this->get_field_id('wpurl'); ?>"><?php _e('WP URL:'); ?></label> 
 <input class="widefat" id="<?php echo $this->get_field_id('wpurl' ); ?>" name="<?php echo $this->get_field_name('wpurl'); ?>" type="text" value="<?php echo esc_attr($option1); ?>" />
