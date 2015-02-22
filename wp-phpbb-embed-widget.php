@@ -64,22 +64,22 @@ class phpBBEmbedWidget extends WP_Widget
 		if(isset($instance['wpurl']) )
 			$option1 = $instance['wpurl'];
 		else
-			$option1 = __('new wpurl', 'wpb_widget_domain');
+			$option1 = __('//site.domain/wordpress', 'wpb_widget_domain');
 
 		if (isset($instance['phpbburl']) )
 			$option2 = $instance['phpbburl'];
 		else
-			$option2 = __('new phpbburl', 'wpb_widget_domain');
+			$option2 = __('//site.domain/phpbb', 'wpb_widget_domain');
 
 		if(isset($instance['recenturl']) )
 			$option3 = $instance['recenturl'];
 		else
-			$option3 = __('new recenturl', 'wpb_widget_domain');
+			$option3 = __('//site.domain/recents.json.php', 'wpb_widget_domain');
 
 		if(isset($instance['title']) )
 			$option4 = $instance['title'];
 		else
-			$option4 = __('new title', 'wpb_widget_domain');
+			$option4 = __('Title', 'wpb_widget_domain');
 ?>
 <p>
 <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
