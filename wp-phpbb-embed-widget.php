@@ -82,7 +82,33 @@ class phpBBEmbedWidget extends WP_Widget
 			$option4 = $instance['title'];
 		else
 			$option4 = __('Title', 'wpb_widget_domain');
+
+		if(isset($instance['fbgcolor']) )
+			$option5 = $instance['fbgcolor'];
+		else
+			$option5 = __('#000000', 'wpb_widget_domain');
+
+		if(isset($instance['ftitle']) )
+			$option6 = $instance['ftitle'];
+		else
+			$option6 = __('Page Title', 'wpb_widget_domain');
+
+		if(isset($instance['hsrc']) )
+			$option7 = $instance['hsrc'];
+		else
+			$option7 = __('Header Image URL', 'wpb_widget_domain');
+
+		if(isset($instance['hurl']) )
+			$option8 = $instance['hurl'];
+		else
+			$option8 = __('Header Link URL', 'wpb_widget_domain');
+
+// 		case "hurl":
+// 			$('#urla').attr('href', val);
+// 		break;
+
 ?>
+<h3>Widget:</h3>
 <p>
 <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
 <input class="widefat" id="<?php echo $this->get_field_id('title' ); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($option4); ?>" />
@@ -99,6 +125,25 @@ class phpBBEmbedWidget extends WP_Widget
 <label for="<?php echo $this->get_field_id( 'recenturl' ); ?>"><?php _e( 'Recents URL:' ); ?></label> 
 <input class="widefat" id="<?php echo $this->get_field_id('recenturl'); ?>" name="<?php echo $this->get_field_name('recenturl'); ?>" type="text" value="<?php echo esc_attr($option3); ?>" />
 </p>
+<hr />
+<h3>FakePress:</h3>
+<p>
+<label for="<?php echo $this->get_field_id('fbgcolor'); ?>"><?php _e('Background color:'); ?></label>
+<input class="widefat" id="<?php echo $this->get_field_id('fbgcolor' ); ?>" name="<?php echo $this->get_field_name('fbgcolor'); ?>" type="text" value="<?php echo esc_attr($option5); ?>" />
+</p>
+<p>
+<label for="<?php echo $this->get_field_id('ftitle'); ?>"><?php _e('Page Title:'); ?></label>
+<input class="widefat" id="<?php echo $this->get_field_id('ftitle' ); ?>" name="<?php echo $this->get_field_name('ftitle'); ?>" type="text" value="<?php echo esc_attr($option6); ?>" />
+</p>
+<p>
+<label for="<?php echo $this->get_field_id('hsrc'); ?>"><?php _e('Header Image URL:'); ?></label>
+<input class="widefat" id="<?php echo $this->get_field_id('hsrc' ); ?>" name="<?php echo $this->get_field_name('hsrc'); ?>" type="text" value="<?php echo esc_attr($option7); ?>" />
+</p>
+<p>
+<label for="<?php echo $this->get_field_id('hurl'); ?>"><?php _e('Header Link URL:'); ?></label>
+<input class="widefat" id="<?php echo $this->get_field_id('hurl' ); ?>" name="<?php echo $this->get_field_name('hurl'); ?>" type="text" value="<?php echo esc_attr($option8); ?>" />
+</p>
+
 <?php
 	}
 
