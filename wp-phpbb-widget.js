@@ -29,7 +29,6 @@
 				var lurl = furl + "&" + row[3];
 				var $base = $("<div>"),
 					$a = $("<a>").attr('href', lurl )
-						.attr('target', "blank")
 						.append(
 							$("<span>").html(row[0] + "<br />- by " + row[1] + " (" + row[4] + ")")
 						),
