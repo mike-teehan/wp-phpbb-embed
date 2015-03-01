@@ -26,7 +26,7 @@
 			var data = json['data'];
 			// 0: title, 1: username, 2: summary, 3: url, 4: time
 			$.each(data, function(key, row) {
-				var lurl = furl + "&" + row[3];
+				var lurl = furl + "&turl=" + encodeURIComponent(row[3]);
 				var $base = $("<div>"),
 					$a = $("<a>").attr('href', lurl )
 						.append(
