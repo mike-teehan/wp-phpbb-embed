@@ -17,7 +17,7 @@
 	$(document).ready(function() {
 		var $bbdiv = $('#phpbbforum');
 		var url = $bbdiv.data("url"),
-			phpbburl = $bbdiv.data("phpbburl");
+			furl = $bbdiv.data("furl");
 		$.get(url, function(json) {
 			if(json['error'] === true) {
 				console.log("wp-phpbb-widget: recents.json.php error (" + json['msg'] + ")");
@@ -26,9 +26,9 @@
 			var data = json['data'];
 			// 0: title, 1: username, 2: summary, 3: url, 4: time
 			$.each(data, function(key, row) {
-				var url = phpbburl + "/viewtopic.php?" + row[3];
+				var lurl = furl + "&" + row[3];
 				var $base = $("<div>"),
-					$a = $("<a>").attr('href', url)
+					$a = $("<a>").attr('href', lurl )
 						.attr('target', "blank")
 						.append(
 							$("<span>").html(row[0] + "<br />- by " + row[1] + " (" + row[4] + ")")

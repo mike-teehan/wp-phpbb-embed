@@ -47,12 +47,17 @@ class phpBBEmbedWidget extends WP_Widget
 		$wpurl = $o['wpurl'];
 		$phpbburl = $o['phpbburl'];
 		$recentsurl = $o['recenturl'];
+		$fbgcolor = $o['fbgcolor'];
+		$ftitle = $o['ftitle'];
+		$hsrc = $o['hsrc'];
+		$hurl = $o['hurl'];
 		// https or not, break the transport off and use whatever is being used and rebuild the url
 		$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https" : "http";
 		$u = parse_url($recentsurl);
 		$dataurl = "{$protocol}://{$u['host']}{$u['path']}";
+		$fakeurl = "{$phpbburl}/fakepress.php#bg={$fbgcolor}&title={$ftitle}&fsrc={$phpbburl}&hsrc={$hsrc}&hurl={$hurl}";
 
-		echo "<div id='phpbbforum' data-url=\"{$dataurl}\" data-phpbburl=\"{$phpbburl}\"><hr></div>";
+		echo "<div id='phpbbforum' data-url=\"{$dataurl}\" data-furl=\"{$fakeurl}\"><hr></div>";
 
 		// boilerplate
 		echo $after_widget;
@@ -102,11 +107,6 @@ class phpBBEmbedWidget extends WP_Widget
 			$option8 = $instance['hurl'];
 		else
 			$option8 = __('Header Link URL', 'wpb_widget_domain');
-
-// 		case "hurl":
-// 			$('#urla').attr('href', val);
-// 		break;
-
 ?>
 <h3>Widget:</h3>
 <p>
