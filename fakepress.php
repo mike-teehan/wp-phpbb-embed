@@ -12,7 +12,7 @@ body {
 
 #headerdiv, #contentdiv {
 	min-width: 100%;
-	margin: 0 auto;
+	margin: 1em auto;
 }
 
 #embedframe {
@@ -32,37 +32,52 @@ body {
 (function($) {
 
 	var $embedframe = $('#embedframe');
-	$embedframe.on('load', function() {
-		var newheight = $embedframe[0].contentWindow.document.body.scrollHeight,
-			newwidth = $embedframe[0].contentWindow.document.body.scrollWidth;
+	$embedframe.on('load', resizeIframe);
+
+	applyParams();
+
+	function resizeIframe() {
+		var newheight = $($embedframe[0].contentWindow.document.body).height(),
+			newwidth = $($embedframe[0].contentWindow.document.body).width();
 		$embedframe.height(newheight + "px");
 		$embedframe.width(newwidth + "px");
-	});
+	}
 
-	var hash = location.hash || "";
-	console.log("hash: " + hash);
-	var params = hash.substr(1).split('&');
-	$.each(params, function(key, row) {
-		var keyval = row.split('=');
-		var val = decodeURI(keyval[1]);
-		switch(keyval[0]) {
-		case "bg":
-			$('body').css('background-color', '#' + val);
-		break;
-		case "title":
-			document.title = val;
-		break;
-		case "fsrc":
-			$embedframe.attr('src', val);
-		break;
-		case "hsrc":
-			$('#logoimg').attr('src', val);
-		break;
-		case "hurl":
-			$('#urla').attr('href', val);
-		break;
-		}
-	});
+	function applyParams() {
+		var params = getParams();
+		if(params['bg'])
+			$('body').css('background-color', '#' + params['bg']);
+		if(params['title'])
+			document.title = params['title'];
+		if(params['fsrc'] && params['turl'])
+			$embedframe.attr('src', params['fsrc'] + decodeURIComponent(params['turl']) );
+		if(params['hsrc'])
+			$('#logoimg').attr('src', params['hsrc']);
+		if(params['hurl'])
+			$('#urla').attr('href', params['hurl']);
+	}
+
+	function getParams() {
+		var hash = location.hash || "";
+		var params = hash.substr(1).split('&');
+		var ret = {};
+		$.each(params, function(key, row) {
+			var keyval = row.split('=');
+			var attr = keyval[0],
+				val = decodeURI(keyval[1]);
+			switch(attr) {
+			case "bg":
+			case "title":
+			case "fsrc":
+			case "hsrc":
+			case "hurl":
+			case "turl":
+				ret[attr] = val;
+			break;
+			}
+		});
+		return ret;
+	}
 
 })(jQuery);
 		</script>
